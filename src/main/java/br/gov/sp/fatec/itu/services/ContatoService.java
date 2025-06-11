@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.gov.sp.fatec.itu.entities.Contato;
 import br.gov.sp.fatec.itu.repositories.ContatoRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ContatoService {
@@ -21,5 +22,38 @@ public class ContatoService {
         return repository.save(contato);
     }
 
-    // Pensar... [update, delete, etc]
+    public Contato findById(Long id) {
+        return repository.findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("Contato não encontrado :("));
+    }
+
+    public List<Contato> search(String termo) {
+        return repository.findByNomeContainingOrTelefoneContainingOrEmailContaining(termo, termo, termo);
+    }
+    public List<Contato> findByCategoria(String categoria) {
+        return repository.findByCategoria(categoria);
+    }
+
+    public List<Contato> findFavoritos() {
+        return repository.findByFavoritoTrue();
+    }
+
+    public Contato update(Long id, Contato contatoAtualizado) {
+        Contato contato = repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Contato não encontrado :("));
+        
+        contato.setNome(contatoAtualizado.getNome());
+        contato.setTelefone(contatoAtualizado.getTelefone());
+        contato.setEmail(contatoAtualizado.getEmail());
+        // ... 
+        
+        return repository.save(contato);
+    }
+
+    public void delete(Long id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Contato não encontrado :(");
+        }
+        repository.deleteById(id);
+    }
 }
