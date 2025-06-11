@@ -1,24 +1,25 @@
 package br.gov.sp.fatec.itu.entities;
 
-import jakarta.persistence.*;
-import java.io.Serializable;
+import jakarta.persistence.*;  
+import java.io.Serializable;  
 
-@Entity
+@Entity  
 @Table(name = "TBL_CONTATO")
-public class Contato implements Serializable {
+public class Contato implements Serializable {  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    private String telefone;
-    private String email;
-    private String endereco;
-    private String cidade;
+    private Long id;  
+
+    private String nome;  
+    private String telefone;  
+    private String email;  
+    private String endereco;  
+    private String cidade;  
     private String categoria;
-    private boolean favorito;
-    private String notas;
-    private String empresa;
-    private String cargo;
+    private boolean favorito;  
+    private String notas;  
+    private String empresa;  
+    private String cargo;  
 
     public Long getId() {
         return id;

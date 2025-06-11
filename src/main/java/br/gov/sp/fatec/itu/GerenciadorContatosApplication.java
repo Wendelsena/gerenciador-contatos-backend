@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.itu.gerenciador_contatos;
+package br.gov.sp.fatec.itu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
